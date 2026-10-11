@@ -539,6 +539,7 @@ export async function createStore(options: StoreOptions): Promise<QMDStore> {
     },
     searchVector: async (q, opts) => {
       const filter = opts?.filter === undefined ? undefined : parseMetadataFilter(opts.filter);
+      await llm.ready?.();
       return internal.searchVec(q, llm.embedModelName ?? DEFAULT_EMBED_MODEL, opts?.limit, opts?.collection, undefined, undefined, filter);
     },
     expandQuery: async (q) => internal.expandQuery(q),
